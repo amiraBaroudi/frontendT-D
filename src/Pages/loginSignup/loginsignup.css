@@ -1,0 +1,215 @@
+/* Container Styles */
+
+body {
+  background: linear-gradient(rgb(0, 13, 107, 0.5), rgb(0, 13, 107, 0.5)),
+    url("../../components/assets/Trucking-Rates.jpg") no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.container2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-top: 30px;
+  width: 50%;
+  padding-bottom: 30px;
+  border-radius: 10px;
+
+}
+
+/* Header Styles */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.text {
+  color: #ffff;
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.underline {
+  width: 61px;
+  height: 6px;
+  background: #000d6b;
+  border-radius: 9px;
+}
+
+/* Inputs Styles */
+
+.inputs {
+  margin: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  margin-top: 7px;
+  width: 450px;
+  height: 60px;
+  background: #e2e2e256;
+  border-radius: 6px;
+  padding: 10px;
+  border: none;
+}
+
+.icon {
+  color: #f9a826;
+}
+
+.input input {
+  height: 60px;
+  width: 400px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #4b4b4b;
+  font-size: 15px;
+  padding: 10px;
+}
+
+/* Forgot Password Styles */
+
+.forgot-password {
+  padding-left: 62px;
+  color: #000d6b;
+  text-shadow: #000d6b;
+  font-size: 18px;
+}
+
+.forgot-password span {
+  color: #000d6b;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* Submit Button Styles */
+
+.submit-container {
+  width: 450px;
+  display: flex;
+  gap: 30px;
+  margin: 25px auto;
+
+}
+
+.submit {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 190px;
+  height: 60px;
+  color: #fff;
+  background: #000d6b;
+  border-radius: 50px;
+  border: none;
+  font-size: 19px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: width 0.3s ease-in-out;
+}
+
+.submit:hover {
+  width: 220px;
+  height: 65px;
+}
+
+.gray {
+  background: #eaeaea;
+  color: #676767;
+}
+
+.erMassage {
+  color: red;
+  font-size: 12px;
+}
+
+/* Laptop */
+
+@media (max-width: 1024px) {
+  .container {
+    width: 50%;
+  }
+
+  .input {
+    width: 350px;
+  }
+
+  .input input {
+    width: 300px;
+  }
+
+  .submit:hover {
+    width: 233px;
+    height: 65px;
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+  .container {
+    width: 60%;
+  }
+
+  .input {
+    width: 250px;
+  }
+
+  .input input {
+    width: 200px;
+  }
+
+  .submit {
+    width: 130px;
+    height: 45px;
+    font-size: 16px;
+  }
+
+  .submit:hover {
+    width: 150px;
+    height: 50px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+  .container {
+    width: 70%;
+
+  }
+
+  .input {
+    width: 200px;
+  }
+
+  .input input {
+    width: 150px;
+  }
+
+  .submit {
+    width: 100px;
+    height: 35px;
+    font-size: 14px;
+  }
+
+  .submit:hover {
+    width: 130px;
+    height: 40px;
+  }
+}

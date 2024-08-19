@@ -1,0 +1,33 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+
+.bb {
+    align-items: center;
+    display: flex;
+    width: 120px;
+    height: 45px;
+    color: #fff;
+    background: rgb(42, 211, 217);
+    border-radius: 50px;
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: width 0.3s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    margin-top: 22px;
+    margin-left: 140px;
+}
+
+.table {
+    margin: auto;
+    margin-top: 20px;
+    width: 100%;
+}

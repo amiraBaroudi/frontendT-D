@@ -1,0 +1,58 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    margin-top: 5px;
+    width: 300px;
+    height: 25px;
+
+    vertical-align: middle;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 20px;
+    padding-top: 5px;
+    align-items: center;
+}
+
+.input input {
+    height: 50px;
+    width: 400px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #4b4b4b;
+    font-size: 12px;
+    padding: 10px;
+    text-align: start;
+    align-items: center;
+
+}
+
+.input select {
+    height: 50px;
+    width: 400px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #4b4b4b;
+    font-size: 12px;
+    padding: 10px;
+}
+
+.input option {
+    height: 50px;
+    width: 400px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #4b4b4b;
+    font-size: 15px;
+    padding: 10px;
+}
