@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex, Layout } from "antd";
-import AppHeader from "../AppHeader";
+import AppHeader from "../Header";
 import SideMenu from "../sideMenu";
 
 const { Header, Sider, Content } = Layout;
