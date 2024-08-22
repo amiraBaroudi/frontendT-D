@@ -13,12 +13,12 @@ const SideMenu = () => {
         }}
         items={[
           {
-            title: "Dashboard",
-            itemId: "/Dashboard",
+            title: "Driver Dashboard",
+            itemId: "/DriverDashboard",
           },
           {
-            title: "User Management",
-            itemId: "/UserManagement",
+            title: "Pending Order",
+            itemId: "/PendingOrder",
           },
           {
             title: "Orders Section",
