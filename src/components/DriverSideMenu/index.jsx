@@ -19,20 +19,6 @@ const SideMenu = () => {
           {
             title: "User Management",
             itemId: "/UserManagement",
-            subNav: [
-              {
-                title: "Drivers",
-                itemId: "/DriversManage",
-              },
-              {
-                title: "Client",
-                itemId: "/UsersManage",
-              },
-              {
-                title: "Staff",
-                itemId: "/StaffManage",
-              },
-            ],
           },
           {
             title: "Orders Section",
