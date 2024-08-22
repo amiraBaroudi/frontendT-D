@@ -21,8 +21,8 @@ const SideMenu = () => {
             itemId: "/PendingOrder",
           },
           {
-            title: "Orders Section",
-            itemId: "/OrdersSection",
+            title: "Order History",
+            itemId: "/OrderHistory",
           },
         ]}
       />
