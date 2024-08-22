@@ -23,17 +23,6 @@ const SideMenu = () => {
           {
             title: "Orders Section",
             itemId: "/OrdersSection",
-
-            subNav: [
-              {
-                title: "Full Order Details",
-                itemId: "/FullOrderDetails",
-              },
-              {
-                title: "Active Order Details",
-                itemId: "/ActiveOrders",
-              },
-            ],
           },
         ]}
       />
