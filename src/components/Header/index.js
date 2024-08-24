@@ -19,7 +19,7 @@ function LogOut() {
   };
   const menu = (
     <Menu onClick={handleMenuClick}>
-      <Menu.Item key="/">Logout</Menu.Item>
+      <Menu.Item key="/SignUp">Logout</Menu.Item>
     </Menu>
   );
   return (
@@ -29,7 +29,10 @@ function LogOut() {
       overlay={menu}
       trigger={["click"]}
     >
-      <Button type="secondary" shape="circle" icon={<IoMenu />} />
+      
+      <Button type="secondary" shape="circle" icon={<IoMenu />} />  
+        
+      
     </Dropdown>
   );
 }
