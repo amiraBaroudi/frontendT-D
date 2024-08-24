@@ -3,7 +3,7 @@ import { Navigation } from "react-minimal-side-navigation";
 import "react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css";
 import { useNavigate } from "react-router-dom";
 
-const SideMenu = () => {
+const DriverSideMenu = () => {
   const navigate = useNavigate();
   return (
       <Navigation
@@ -28,4 +28,4 @@ const SideMenu = () => {
       />
   );
 }
-export default SideMenu;
+export default DriverSideMenu;
