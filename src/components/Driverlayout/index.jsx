@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex, Layout } from "antd";
-import DriverHeader from "../DriverHeader";
+import DriverHeader from "../Header";
 import DriverSideMenu from "../DriverSideMenu";
 
 const { Header, Sider, Content } = Layout;

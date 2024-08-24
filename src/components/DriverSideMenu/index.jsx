@@ -18,7 +18,7 @@ const DriverSideMenu = () => {
           },
           {
             title: "Pending Order",
-            itemId: "/PendingOrder",
+            itemId: "/PindingOrderHistory",
           },
           {
             title: "Order History",

@@ -3,7 +3,7 @@ import DriverLayout from "../components/DriverLayout";
 
 const DriverDashboard = () => {
     return (
-        <DriverLayout>
+    <DriverLayout>
       
     </DriverLayout>
   );

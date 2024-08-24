@@ -3,7 +3,7 @@ import DriverLayout from "../components/DriverLayout";
 
 const OrderHistory = () => {
     return (
-        <DriverLayout>
+    <DriverLayout>
       <Typography.Title level={4}> Order History </Typography.Title>     
     
     </DriverLayout>

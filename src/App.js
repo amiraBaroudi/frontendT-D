@@ -31,7 +31,7 @@ const Routers = () => {
       <Route path="*" element={<NotFound />} />
 
       <Route path="OrderHistory" element={<OrderHistory />} />
-      <Route path="PindingOrder" element={<PindingOrderHistory />} />
+      <Route path="PindingOrderHistory" element={<PindingOrderHistory />} />
       <Route path="DriverDashboard" element={<DriverDashboard />} />
 
       <Route path="/Dashboard" element={<Dashboard />}></Route>
