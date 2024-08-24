@@ -1,5 +1,5 @@
 import { Typography, Table } from "antd";
-import DriverLayout from "../components/Driverlayout/index";
+import DriverLayout from "../components/DriverLayout";
 
 const OrderHistory = () => {
     return (

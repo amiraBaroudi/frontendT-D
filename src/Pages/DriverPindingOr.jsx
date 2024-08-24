@@ -1,10 +1,10 @@
 import { Typography } from "antd";
-import DriverLayout from "../components/Driverlayout/index";
+import DriverLayout from "../components/DriverLayout";
 
 const PindingOrderHistory = () => {
     return (
     <DriverLayout>
-      <Typography.Title level={4}> Order History </Typography.Title>  
+      <Typography.Title level={4}> Pinding Order History </Typography.Title>  
     </DriverLayout>
   );
 }
