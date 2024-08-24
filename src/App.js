@@ -16,7 +16,7 @@ import NotFound from "./Pages/NotFound";
 import Contact from "./Pages/Contact";
 
 import OrderHistory from "./Pages/DriverOrderHistory";
-import PindingOrder from "./Pages/DriverPindingOr";
+import PindingOrderHistory from "./Pages/DriverPindingOr";
 
 const Routers = () => {
   return (
@@ -30,7 +30,7 @@ const Routers = () => {
       <Route path="*" element={<NotFound />} />
 
       <Route path="OrderHistory" element={<OrderHistory />} />
-      <Route path="PindingOrder" element={<PindingOrder />} />
+      <Route path="PindingOrder" element={<PindingOrderHistory />} />
 
       <Route path="/Dashboard" element={<Dashboard />}></Route>
       <Route path="/UserManagement" element={<DriversManage />}></Route>
