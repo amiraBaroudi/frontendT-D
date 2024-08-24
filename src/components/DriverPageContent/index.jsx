@@ -1,10 +1,10 @@
 import AppRoutes from "../AppRoutes";
 
-function PageContent() {
+function DriverPageContent() {
   return (
     <div className="PageContent">
       <AppRoutes />
     </div>
   );
 }
-export default PageContent;
+export default DriverPageContent;

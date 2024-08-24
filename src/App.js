@@ -12,10 +12,11 @@ import Home from "./Pages/Home";
 import About from "./Pages/About";
 import CarListing from "./Pages/CarListing";
 import CarDetails from "./Pages/CarDetails";
-
 import NotFound from "./Pages/NotFound";
 import Contact from "./Pages/Contact";
 
+import OrderHistory from "./Pages/DriverOrderHistory";
+import PindingOrder from "./Pages/DriverPindingOr";
 
 const Routers = () => {
   return (
@@ -27,7 +28,9 @@ const Routers = () => {
       <Route path="/cars/:slug" element={<CarDetails />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="*" element={<NotFound />} />
-    
+
+      <Route path="OrderHistory" element={<OrderHistory />} />
+      <Route path="PindingOrder" element={<PindingOrder />} />
 
       <Route path="/Dashboard" element={<Dashboard />}></Route>
       <Route path="/UserManagement" element={<DriversManage />}></Route>

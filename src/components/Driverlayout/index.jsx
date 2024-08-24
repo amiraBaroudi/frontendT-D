@@ -40,7 +40,7 @@ const layoutStyle = {
   maxWidth: "calc(100%)",
 };
 
-function LayoutWrapper({ children }) {
+function DriverLayout({ children }) {
   return (
     <Flex gap='middle' wrap height='100vh'>
       <Layout style={layoutStyle}>
@@ -58,4 +58,4 @@ function LayoutWrapper({ children }) {
   );
 }
 
-export default LayoutWrapper;
+export default DriverLayout;

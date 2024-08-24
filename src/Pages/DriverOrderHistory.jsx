@@ -1,10 +1,10 @@
 import { Typography, Table } from "antd";
-import DriverLayout from "../../components/DriverLayout";
+import DriverLayout from "../components/Driverlayout";
 
-const ActiveOrders = () => {
+const OrderHistory = () => {
     return (
         <DriverLayout>
-      <Typography.Title level={4}> Users </Typography.Title>     
+      <Typography.Title level={4}> Order History </Typography.Title>     
     <Table
       className="table"
       columns={[
@@ -29,4 +29,4 @@ const ActiveOrders = () => {
     </DriverLayout>
   );
 }
-export default ActiveOrders;
+export default OrderHistory;

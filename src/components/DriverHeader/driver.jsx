@@ -2,7 +2,7 @@ import { IoMenu } from "react-icons/io5";
 import { Button, Dropdown, Menu } from "antd";
 import { useState, navigate } from "react";
 
-const AppHeader = () => {
+const DriverHeader = () => {
       
   const [visible, setVisible] = useState(false);
   const handleMenuClick = ({ key }) => {
@@ -27,4 +27,4 @@ const AppHeader = () => {
   );
 }
 
-export default AppHeader;
+export default DriverHeader;
