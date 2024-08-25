@@ -17,7 +17,6 @@ import Contact from "./Pages/Contact";
 
 import OrderHistory from "./Pages/DriverOrderHistory";
 import PindingOrderHistory from "./Pages/DriverPindingOr";
-import DriverDashboard from "./Pages/DriverDashboard"
 
 const Routers = () => {
   return (
@@ -32,7 +31,6 @@ const Routers = () => {
 
       <Route path="OrderHistory" element={<OrderHistory />} />
       <Route path="PindingOrderHistory" element={<PindingOrderHistory />} />
-      <Route path="DriverDashboard" element={<DriverDashboard />} />
 
       <Route path="/Dashboard" element={<Dashboard />}></Route>
       <Route path="/UserManagement" element={<DriversManage />}></Route>

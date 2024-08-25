@@ -13,10 +13,6 @@ const DriverSideMenu = () => {
         }}
         items={[
           {
-            title: "Driver Dashboard",
-            itemId: "/DriverDashboard",
-          },
-          {
             title: "Pending Order",
             itemId: "/PindingOrderHistory",
           },
