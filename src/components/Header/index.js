@@ -1,6 +1,5 @@
-import { IoMenu } from "react-icons/io5";
-import { Button, Dropdown, Menu } from "antd";
-import { useState, navigate } from "react";
+import { Link } from "react-router-dom";
+import "../../styles/header.css";
 
 function AppHeader() {
   return (
@@ -11,29 +10,13 @@ function AppHeader() {
 }
 
 function LogOut() {
-  const [visible, setVisible] = useState(false);
-  const handleMenuClick = ({ key }) => {
-    if (key === "/") {
-      navigate("/");
-    }
-  };
-  const menu = (
-    <Menu onClick={handleMenuClick}>
-      <Menu.Item key="/SignUp">Logout</Menu.Item>
-    </Menu>
-  );
+  
   return (
-    <Dropdown
-      visible={visible}
-      onVisibleChange={(visible) => setVisible(visible)}
-      overlay={menu}
-      trigger={["click"]}
-    >
-      
-      <Button type="secondary" shape="circle" icon={<IoMenu />} />  
-        
-      
-    </Dropdown>
+    <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
+      <Link to="/SignUp" className=" d-flex align-items-center gap-1">
+        <i class="ri-login-circle-line"></i> Login
+      </Link>
+    </div>
   );
 }
 

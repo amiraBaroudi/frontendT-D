@@ -7,7 +7,7 @@ const { Header, Sider, Content } = Layout;
 
 const headerStyle = {
   background:
-    "linear-gradient(90deg, rgba(0, 163, 184, 0.555) 0%, rgba(42, 211, 217, 0.555) 50%, rgba(132, 247, 234, 0.555) 100%)",
+    "linear-gradient(90deg, rgba(0, 163, 184) 0%, rgba(42, 211, 217) 50%, rgba(132, 247, 234) 100%)",
   height: "80px",
   display: "flex",
   justifyContent: "space-between",
