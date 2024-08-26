@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/booking-form.css";
 import { Form, FormGroup } from "reactstrap";
 
 const BookingForm = () => {
+  const [FirstName,setFristName]=useState('')
   const submitHandler = (event) => {
+  
     event.preventDefault();
   };
+  
   return (
     <Form onSubmit={submitHandler}>
       <FormGroup className="booking__form d-inline-block me-4 mb-4">
-        <input type="text" placeholder="First Name" />
+        <input type="text" placeholder="First Name" value={FirstName} onChange={(e)=>setFristName(e.target.value)}/>
       </FormGroup>
       <FormGroup className="booking__form d-inline-block ms-1 mb-4">
         <input type="text" placeholder="Last Name" />
@@ -69,6 +72,9 @@ const BookingForm = () => {
           placeholder="Write a note"
         ></textarea>
       </FormGroup>
+      <div className="payment text-end mt-5">
+        <button type="submit">Reserve Now</button>
+      </div>
     </Form>
   );
 };

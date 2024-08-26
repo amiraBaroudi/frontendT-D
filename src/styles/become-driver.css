@@ -11,16 +11,18 @@
 .become__driver button {
   background: #fff;
   color: #000d6b;
-  font-weight: 600;
+  font-weight: 1000;
   border: none;
   outline: none;
 }
 
 .become__driver a {
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 1000;
   color: #000d6b;
+  background: #fff;
 }
+
 
 .become__driver-title {
   font-size: 2.8rem;

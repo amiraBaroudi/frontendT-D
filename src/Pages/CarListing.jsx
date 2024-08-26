@@ -12,7 +12,7 @@ const CarListing = () => {
     <Helmet title="Cars">
       <CommonSection title="Car Listing" />
 
-      <section>
+      <section >
       
           <Row>
            {carData.map((item) => (

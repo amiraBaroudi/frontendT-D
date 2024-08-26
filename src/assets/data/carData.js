@@ -9,7 +9,6 @@ const carData = [
     rating: 112,
     carName: "Large Truck",
     imgUrl: img01,
-    price: 50,
     speed: "20kmpl",
     gps: "GPS Navigation",
     description:
@@ -32,7 +31,6 @@ const carData = [
     rating: 132,
     carName: "Small Truck",
     imgUrl: img03,
-    price: 65,
     speed: "20kmpl",
     gps: "GPS Navigation",
     description:
