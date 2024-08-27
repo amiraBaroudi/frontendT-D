@@ -9,10 +9,13 @@ const BookingForm = () => {
   const [PhoneNum,setPhoneNum]=useState('')
   const [PickupAddress,setPickupAddress]=useState('')
   const [DropoffAddress,setDropoffAddress]=useState('')
-  const []=useState('')
-  const []=useState('')
-  const []=useState('')
-  const []=useState('')
+  const [Size,setSize]=useState('')
+  const [Material,setMaterial]=useState('')
+  const [Breakable,setBreakable]=useState('')
+  const [Date,setDate]=useState('')
+  const [Time,setTime]=useState('')
+
+
   const submitHandler = (event) => {
   
     event.preventDefault();
@@ -42,27 +45,27 @@ const BookingForm = () => {
       </FormGroup>
 
       <FormGroup className="booking__form d-inline-block me-4 mb-4">
-        <select name="" id="">
+        <select name="" id=""  value={Size} onChange={(e)=>setSize(e.target.value)}>
           <option value="1 person">Big</option>
           <option value="2 person">Medium</option>
           <option value="3 person">Small</option>
         </select>
       </FormGroup>
       <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-        <select name="" id="">
+        <select name="" id="" value={Material} onChange={(e)=>setMaterial(e.target.value)} >
           <option value="1 luggage">Soft</option>
           <option value="2 luggage">Solid</option>
         </select>
       </FormGroup>
 
       <FormGroup className="booking__form d-inline-block me-4 mb-4">
-        <select name="" id="">
+        <select name="" id="" value={Breakable} onChange={(e)=>setBreakable(e.target.value)}>
           <option value="1 person">Breakable</option>
           <option value="2 person">Un Breakable</option>
         </select>
       </FormGroup>
       <FormGroup className="booking__form d-inline-block me-4 mb-4">
-        <input type="date" placeholder="Journey Date" />
+        <input type="date" placeholder="Journey Date" value={Date} onChange={(e)=>setDate(e.target.value)}/>
       </FormGroup>
 
       <FormGroup className="booking__form d-inline-block ms-1 mb-4">
@@ -70,6 +73,7 @@ const BookingForm = () => {
           type="time"
           placeholder="Journey Time"
           className="time__picker"
+          value={Time} onChange={(e)=>setTime(e.target.value)}
         />
       </FormGroup>
 
