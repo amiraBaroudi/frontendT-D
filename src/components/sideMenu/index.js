@@ -20,7 +20,7 @@ function SideMenu() {
           },
           {
             title: "User Management",
-            itemId: "/UserManagement",
+            itemId: "",
             subNav: [
               {
                 title: "Drivers",
@@ -38,12 +38,12 @@ function SideMenu() {
           },
           {
             title: "Orders Section",
-            itemId: "/OrdersSection",
+            
 
             subNav: [
               {
-                title: "Full Order Details",
-                itemId: "/FullOrderDetails",
+                title: "All Order Details",
+                itemId: "/AllOrderDetails",
               },
               {
                 title: "Active Order Details",
