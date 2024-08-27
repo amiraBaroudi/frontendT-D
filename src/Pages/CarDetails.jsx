@@ -21,7 +21,7 @@ const CarDetails = () => {
     <UserLayout>
     <Helmet title={singleCarItem.carName}>
       <section>
-        <Container style={{height:'150vh' ,marginBottom:20}}>
+        <Container style={{height:'175vh' ,marginBottom:20}}>
           <Row>
             <Col lg="6">
               <img src={singleCarItem.imgUrl} alt="" className="w-100" />
