@@ -33,19 +33,9 @@ const CarDetails = () => {
 
                 <div className=" d-flex align-items-center gap-5 mb-4 mt-3">
                   <h6 className="rent__price fw-bold fs-4">
-                    ${singleCarItem.price}.00 / Day
+                    {singleCarItem.price}
                   </h6>
 
-                  <span className=" d-flex align-items-center gap-2">
-                    <span style={{ color: "#f9a826" }}>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                    </span>
-                    ({singleCarItem.rating} ratings)
-                  </span>
                 </div>
 
                 <p className="section__description">
@@ -56,22 +46,7 @@ const CarDetails = () => {
                   className=" d-flex align-items-center mt-3"
                   style={{ columnGap: "4rem" }}
                 >
-                  <span className=" d-flex align-items-center gap-1 section__description">
-                    <i
-                      class="ri-roadster-line"
-                      style={{ color: "#f9a826" }}
-                    ></i>{" "}
-                    {singleCarItem.model}
-                  </span>
-
-                  <span className=" d-flex align-items-center gap-1 section__description">
-                    <i
-                      class="ri-settings-2-line"
-                      style={{ color: "#f9a826" }}
-                    ></i>{" "}
-                    {singleCarItem.automatic}
-                  </span>
-
+                  
                   <span className=" d-flex align-items-center gap-1 section__description">
                     <i
                       class="ri-timer-flash-line"
@@ -79,33 +54,14 @@ const CarDetails = () => {
                     ></i>{" "}
                     {singleCarItem.speed}
                   </span>
-                </div>
 
-                <div
-                  className=" d-flex align-items-center mt-3"
-                  style={{ columnGap: "2.8rem" }}
-                >
                   <span className=" d-flex align-items-center gap-1 section__description">
                     <i class="ri-map-pin-line" style={{ color: "#f9a826" }}></i>{" "}
                     {singleCarItem.gps}
                   </span>
 
-                  <span className=" d-flex align-items-center gap-1 section__description">
-                    <i
-                      class="ri-wheelchair-line"
-                      style={{ color: "#f9a826" }}
-                    ></i>{" "}
-                    {singleCarItem.seatType}
-                  </span>
-
-                  <span className=" d-flex align-items-center gap-1 section__description">
-                    <i
-                      class="ri-building-2-line"
-                      style={{ color: "#f9a826" }}
-                    ></i>{" "}
-                    {singleCarItem.brand}
-                  </span>
                 </div>
+
               </div>
             </Col>
 
