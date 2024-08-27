@@ -47,9 +47,11 @@ function DriverInputs() {
   const [password, setPassword] = useState("");
   const [avilability, setSelectedAvilability] = useState("");
   const [tableData, setTableData] = useState([]);
+  const [Size, setSize] = useState([]);
   const handleAvilability = (event) => {
     setSelectedAvilability(event.target.value);
   };
+  
   const [inputData, setInputData] = useState({});
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -127,6 +129,16 @@ function DriverInputs() {
             <option value="avilable">Avilable</option>
             <option value="unAvilable">Un Avilable</option>
           </select>
+
+          <select
+            className="input"
+            value={Size}
+            onChange={(e) => setSize(e)}
+          >
+            <option value="avilable">Large</option>
+            <option value="unAvilable">medium</option>
+            <option value="unAvilable">Small</option>
+          </select>
         </form>
       </Modal>
 
@@ -143,7 +155,7 @@ function DriverInputs() {
               dataIndex: "driverId",
             },
             {
-              title: "Full Name",
+              title: "User Name",
               dataIndex: "driverName",
             },
             {
