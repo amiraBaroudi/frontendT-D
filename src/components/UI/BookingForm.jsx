@@ -4,6 +4,15 @@ import { Form, FormGroup } from "reactstrap";
 
 const BookingForm = () => {
   const [FirstName,setFristName]=useState('')
+  const [LastName,setLastName]=useState('')
+  const [EmailName,setEmailName]=useState('')
+  const [PhoneNum,setPhoneNum]=useState('')
+  const [PickupAddress,setPickupAddress]=useState('')
+  const [DropoffAddress,setDropoffAddress]=useState('')
+  const []=useState('')
+  const []=useState('')
+  const []=useState('')
+  const []=useState('')
   const submitHandler = (event) => {
   
     event.preventDefault();
@@ -15,21 +24,21 @@ const BookingForm = () => {
         <input type="text" placeholder="First Name" value={FirstName} onChange={(e)=>setFristName(e.target.value)}/>
       </FormGroup>
       <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-        <input type="text" placeholder="Last Name" />
+        <input type="text" placeholder="Last Name" value={LastName} onChange={(e)=>setLastName(e.target.value)}/>
       </FormGroup>
 
       <FormGroup className="booking__form d-inline-block me-4 mb-4">
-        <input type="email" placeholder="Email" />
+        <input type="email" placeholder="Email" value={EmailName} onChange={(e)=>setEmailName(e.target.value)}/>
       </FormGroup>
       <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-        <input type="number" placeholder="Phone Number" />
+        <input type="number" placeholder="Phone Number"  value={PhoneNum} onChange={(e)=>setPhoneNum(e.target.value)}/>
       </FormGroup>
 
       <FormGroup className="booking__form d-inline-block me-4 mb-4">
-        <input type="text" placeholder="Pickup Address" />
+        <input type="text" placeholder="Pickup Address"  value={PickupAddress} onChange={(e)=>setPickupAddress(e.target.value)}/>
       </FormGroup>
       <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-        <input type="text" placeholder="Dropoff Address" />
+        <input type="text" placeholder="Dropoff Address"  value={DropoffAddress} onChange={(e)=>setDropoffAddress(e.target.value)}/>
       </FormGroup>
 
       <FormGroup className="booking__form d-inline-block me-4 mb-4">
