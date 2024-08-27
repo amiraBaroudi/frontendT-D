@@ -44,8 +44,6 @@ function Submit(e){
             </div>)}
         </div>
 
-        {action==="Sign Up"?<div></div>:<div className="forgot-password">Lost Password? <span>Click Here!</span></div>}
-
         <div className="submit-container">
             <button className={action === "Login" ? "submit gray" : "submit" } onClick={()=>{setAction("Sign Up")}}>Sign Up</button>
             <button className={action === "Sign Up" ? "submit gray" : "submit" } onClick={()=>{setAction("Login")}}>Login</button>
