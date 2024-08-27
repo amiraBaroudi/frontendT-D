@@ -14,7 +14,12 @@ const BookingForm = () => {
   const [Breakable,setBreakable]=useState('')
   const [Date,setDate]=useState('')
   const [Time,setTime]=useState('')
-
+  const [Not,setNot]=useState('')
+  
+  
+  const handleLinkClick = () => {
+    console.log("handleLinkClick called");
+  };
 
   const submitHandler = (event) => {
   
@@ -65,7 +70,9 @@ const BookingForm = () => {
         </select>
       </FormGroup>
       <FormGroup className="booking__form d-inline-block me-4 mb-4">
-        <input type="date" placeholder="Journey Date" value={Date} onChange={(e)=>setDate(e.target.value)}/>
+        <input type="date" 
+        placeholder="Journey Date" 
+        value={Date} onChange={(e)=>setDate(e.target.value)}/>
       </FormGroup>
 
       <FormGroup className="booking__form d-inline-block ms-1 mb-4">
@@ -83,10 +90,11 @@ const BookingForm = () => {
           type="textarea"
           className="textarea"
           placeholder="Write a note"
+          value={Not} onChange={(e)=>setNot(e.target.value)}
         ></textarea>
       </FormGroup>
       <div className="payment text-end mt-5">
-        <button type="submit">Reserve Now</button>
+        <button type="submit" onClick={handleLinkClick}>Reserve Now</button>
       </div>
     </Form>
   );
