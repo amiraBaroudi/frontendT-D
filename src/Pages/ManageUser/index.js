@@ -23,6 +23,14 @@ function RecentOrder() {
         },
         {
           title: "User Name",
+          dataIndex: "Text",
+        },
+        {
+          title: "Phone Number",
+          dataIndex: "Number",
+        },
+        {
+          title: "Email",
           dataIndex: "Email",
         },
         {
