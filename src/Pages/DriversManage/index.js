@@ -22,7 +22,7 @@ function DriverInputs() {
   const handleOk = () => {
     const newData = { ...inputData, password, role: avilability };
     axios
-      .post("http://192.168.137.153:8000/api/drivers", newData)
+      .post("http://127.0.0.1:8000/api/drivers", newData)
       .then((res) => {
         console.log(res.data);
         console.log("drivers added successfuly");
@@ -47,7 +47,7 @@ function DriverInputs() {
   const [password, setPassword] = useState("");
   const [avilability, setSelectedAvilability] = useState("");
   const [tableData, setTableData] = useState([]);
-  const [Size, setSize] = useState([]);
+  const [vehicle_type, setvehicle_type] = useState([]);
   const handleAvilability = (event) => {
     setSelectedAvilability(event.target.value);
   };
@@ -73,11 +73,11 @@ function DriverInputs() {
           <Input
             className="input"
             type="text"
-            placeholder="name"
-            value={inputData.name}
+            placeholder="username"
+            value={inputData.username}
             variant="filled"
             onChange={(e) =>
-              setInputData({ ...inputData, name: e.target.value })
+              setInputData({ ...inputData, username: e.target.value })
             }
           />
 
@@ -106,21 +106,6 @@ function DriverInputs() {
               })
             }
           />
-
-          <Input
-            className="input"
-            type="text"
-            placeholder="Vehicle Type"
-            value={inputData.vehicle_type}
-            variant="filled"
-            onChange={(e) =>
-              setInputData({
-                ...inputData,
-                vehicle_type: e.target.value,
-              })
-            }
-          />
-
           <select
             className="input"
             value={avilability}
@@ -132,12 +117,12 @@ function DriverInputs() {
 
           <select
             className="input"
-            value={Size}
-            onChange={(e) => setSize(e)}
+            value={vehicle_type}
+            onChange={(e) => setvehicle_type(e)}
           >
-            <option value="avilable">Large</option>
-            <option value="unAvilable">medium</option>
-            <option value="unAvilable">Small</option>
+            <option value="Large">Large</option>
+            <option value="medium">medium</option>
+            <option value="Small">Small</option>
           </select>
         </form>
       </Modal>
