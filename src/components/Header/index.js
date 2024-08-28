@@ -14,7 +14,7 @@ function LogOut() {
   return (
     <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
       <Link to="/SignUp" className=" d-flex align-items-center gap-1">
-        <i class="ri-login-circle-line"></i> Login
+        <i class="ri-login-circle-line"></i> Logout
       </Link>
     </div>
   );
