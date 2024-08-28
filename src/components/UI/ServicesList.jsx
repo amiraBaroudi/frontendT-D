@@ -14,7 +14,7 @@ const ServicesList = () => {
 };
 
 const ServiceItem = ({ item }) => (
-  <Col lg="4" md="4" sm="6" className="mb-3">
+  <Col lg="6" md="6" sm="6" className="mb-3">
     <div className="service__item">
       <span className="mb-3 d-inline-block">
         <i class={item.icon} />
