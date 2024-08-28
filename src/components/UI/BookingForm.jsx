@@ -21,8 +21,7 @@ const BookingForm = () => {
     console.log("handleLinkClick called");
   };
 
-  const submitHandler = (event) => {
-  
+  const submitHandler = (event) => {  
     event.preventDefault();
   };
   
