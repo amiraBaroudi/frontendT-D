@@ -1,9 +1,10 @@
 import { Space, Typography, Table, Modal, Input } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LayoutWrapper from "../../components/layout";
 import "./index.css";
 import axios from "axios";
+import { Spin } from "antd";
 
 function DriverManage() {
   return (
@@ -18,14 +19,32 @@ function DriverManage() {
 
 function DriverInputs() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOk = () => {
-    const newData = { ...inputData, password, role: avilability };
+  const [drivers, setDrivers] = useState([]);
+  useEffect(() => {
     axios
-      .post("http://127.0.0.1:8000/api/drivers", newData)
+      .get("http://localhost:8000/api/drivers")
+      .then((res) => {
+        console.log(res.data);
+        setDrivers(res.data.data);
+        console.log("drivers get successfuly");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const [loading, setLoading] = useState(false);
+  const handleOk = () => {
+    const newData = { ...inputData, password, availability: avilability };
+
+    setLoading(true);
+    axios
+      .post("http://localhost:8000/api/drivers", newData)
       .then((res) => {
         console.log(res.data);
         console.log("drivers added successfuly");
+        setLoading(false);
+        setIsModalOpen(false);
       })
       .catch((error) => {
         console.log(error);
@@ -45,21 +64,21 @@ function DriverInputs() {
   };
 
   const [password, setPassword] = useState("");
-  const [avilability, setSelectedAvilability] = useState("");
+  const [avilability, setSelectedAvilability] = useState(1);
   const [tableData, setTableData] = useState([]);
-  const [vehicle_type, setvehicle_type] = useState([]);
   const handleAvilability = (event) => {
     setSelectedAvilability(event.target.value);
   };
-  
+
   const [inputData, setInputData] = useState({});
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newData = { ...inputData, password, role: avilability };
+    const newData = { ...inputData, password, availability: avilability };
     setTableData([...tableData, newData]);
     setInputData({});
     setPassword("");
     setSelectedAvilability("");
+    setIsModalOpen(true);
   };
   return (
     <>
@@ -69,65 +88,79 @@ function DriverInputs() {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <form onSubmit={handleSubmit}>
-          <Input
-            className="input"
-            type="text"
-            placeholder="username"
-            value={inputData.username}
-            variant="filled"
-            onChange={(e) =>
-              setInputData({ ...inputData, username: e.target.value })
-            }
-          />
+        <Spin spinning={loading}>
+          <form onSubmit={handleSubmit}>
+            <Input
+              className="input"
+              type="text"
+              placeholder="username"
+              value={inputData.username}
+              variant="filled"
+              onChange={(e) =>
+                setInputData({ ...inputData, username: e.target.value })
+              }
+            />
 
-          <Input.Password
-            className="input"
-            type="password"
-            placeholder="Password"
-            value={password}
-            variant="filled"
-            iconRender={(visible) =>
-              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-            }
-            onChange={(e) => setPassword(e.target.value)}
-          />
+            <Input.Password
+              className="input"
+              type="password"
+              placeholder="Password"
+              value={password}
+              variant="filled"
+              iconRender={(visible) =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-          <Input
-            className="input"
-            type="number"
-            placeholder="License Number"
-            value={inputData.license_number}
-            variant="filled"
-            onChange={(e) =>
-              setInputData({
-                ...inputData,
-                license_number: e.target.value,
-              })
-            }
-          />
-          <select
-            className="input"
-            value={avilability}
-            onChange={(e) => handleAvilability(e)}
-          >
-            <option value="avilable">Avilable</option>
-            <option value="unAvilable">Un Avilable</option>
-          </select>
+            <Input
+              className="input"
+              type="text"
+              placeholder="license Number"
+              value={inputData.license_number}
+              variant="filled"
+              onChange={(e) =>
+                setInputData({
+                  ...inputData,
+                  license_number: e.target.value,
+                })
+              }
+            />
 
-          <select
-            className="input"
-            value={vehicle_type}
-            onChange={(e) => setvehicle_type(e)}
-          >
-            <option value="Large">Large</option>
-            <option value="medium">medium</option>
-            <option value="Small">Small</option>
-          </select>
-        </form>
+            <Input
+              className="input"
+              type="text"
+              placeholder="Vehicle Type"
+              value={inputData.vehicle_type}
+              variant="filled"
+              onChange={(e) =>
+                setInputData({
+                  ...inputData,
+                  vehicle_type: e.target.value,
+                })
+              }
+            />
+
+            <select
+              className="input"
+              value={avilability}
+              onChange={(e) => handleAvilability(e)}
+            >
+              <option value={0}>Avilable</option>
+              <option value={1}>Un Avilable</option>
+            </select>
+          </form>
+        </Spin>
       </Modal>
 
-      <div style={{display:'flex',alignItems:'center',flexDirection:'column',justifyContent:'center'}}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
         <button className="bb" type="submit" onClick={handleLinkClick}>
           Create
         </button>
@@ -137,11 +170,11 @@ function DriverInputs() {
           columns={[
             {
               title: "Driver ID",
-              dataIndex: "driverId",
+              dataIndex: "driver_id",
             },
             {
               title: "User Name",
-              dataIndex: "driverName",
+              dataIndex: "username",
             },
             {
               title: "Password",
@@ -149,17 +182,18 @@ function DriverInputs() {
             },
             {
               title: "License Number",
-              dataIndex: "number",
+              dataIndex: "license_number",
             },
             {
               title: "Vehicle Type",
-              dataIndex: "boolean",
+              dataIndex: "vehicle_type",
             },
             {
               title: "Avilability",
-              dataIndex: "boolean",
+              dataIndex: "availability",
             },
           ]}
+          dataSource={drivers}
         ></Table>
       </div>
     </>
