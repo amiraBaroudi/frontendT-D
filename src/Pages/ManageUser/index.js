@@ -1,5 +1,7 @@
 import { Space, Typography, Table } from "antd";
 import LayoutWrapper from "../../components/layout";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function ActiveOrders() {
   return (
@@ -13,6 +15,21 @@ function ActiveOrders() {
 }
 
 function RecentOrder() {
+  const [User, setUser] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/users")
+      .then((res) => {
+        console.log(res.data);
+        setUser(res.data.data);
+        console.log("User get successfuly");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <Table
       className="table"
@@ -42,6 +59,7 @@ function RecentOrder() {
           dataIndex: "boolean",
         },
       ]}
+      dataSource={User}
     ></Table>
   );
 }
