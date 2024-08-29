@@ -3,18 +3,38 @@ import { MdEventBusy, MdDriveEta, MdRequestPage } from "react-icons/md";
 import { IoPersonOutline } from "react-icons/io5";
 import { GoNumber } from "react-icons/go";
 import LayoutWrapper from "../../components/layout";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function Dashboard() {
+  const [statistics, setStatistics] = useState({
+    numberOfClients: 0,
+    totalRequests: 0,
+    activeOrders: 0,
+    totalDrivers: 0,
+    busyDrivers: 0,
+  });
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/statistics")
+      .then((res) => {
+        if (res.data && res.data.data && res.data.data.length > 0) {
+          const stats = res.data.data[0]; // الحصول على أول كائن من المصفوفة
+          setStatistics(stats); // تعيين الكائن إلى الحالة
+        }
+        console.log("Statistics retrieved successfully");
+      })
+      .catch((error) => {
+        console.error("Error fetching statistics", error);
+      });
+  }, []);
+
   return (
     <LayoutWrapper>
       <Typography.Title level={4}>Statistics</Typography.Title>
-      <Space direction="horizontal">
+      <Space direction="horizontal" wrap>
         <StatisticsCard
-          style={{
-            display: "flex",
-            cursor: "pointer",
-            borderRadius: "30%",
-          }}
           icon={
             <GoNumber
               style={{
@@ -25,8 +45,8 @@ function Dashboard() {
               }}
             />
           }
-          title={"Number of client"}
-          value={123}
+          title="Number of clients"
+          value={statistics.numberOfClients}
         />
         <StatisticsCard
           icon={
@@ -39,8 +59,8 @@ function Dashboard() {
               }}
             />
           }
-          title={"Total number of requests"}
-          value={123}
+          title="Total number of requests"
+          value={statistics.totalRequests}
         />
         <StatisticsCard
           icon={
@@ -53,8 +73,8 @@ function Dashboard() {
               }}
             />
           }
-          title={"Number of active orders now"}
-          value={123}
+          title="Number of active orders now"
+          value={statistics.activeOrders}
         />
         <StatisticsCard
           icon={
@@ -67,8 +87,8 @@ function Dashboard() {
               }}
             />
           }
-          title={"Total number of drivers"}
-          value={123}
+          title="Total number of drivers"
+          value={statistics.totalDrivers}
         />
         <StatisticsCard
           icon={
@@ -81,8 +101,8 @@ function Dashboard() {
               }}
             />
           }
-          title={"Number of busy drivers"}
-          value={123}
+          title="Number of busy drivers"
+          value={statistics.busyDrivers}
         />
       </Space>
     </LayoutWrapper>

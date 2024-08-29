@@ -30,10 +30,6 @@ function SideMenu() {
                 title: "Client",
                 itemId: "/UsersManage",
               },
-              {
-                title: "Staff",
-                itemId: "/StaffManage",
-              },
             ],
           },
           {

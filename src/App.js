@@ -1,7 +1,6 @@
 import "./App.css";
 import Loginsignup from "./Pages/loginSignup/loginsignup";
 import AllOrderDetails from "./Pages/AllOrderDetails";
-import StaffManage from "./Pages/StaffManage";
 import ActiveOrders from "./Pages/ActiveOrders";
 import Dashboard from "./Pages/Dashboard";
 import DriversManage from "./Pages/DriversManage";
@@ -38,7 +37,6 @@ const Routers = () => {
       <Route path="/ActiveOrders" element={<ActiveOrders />}></Route>
       <Route path="/DriversManage" element={<DriversManage />}></Route>
       <Route path="/UsersManage" element={<UsersManage />}></Route>
-      <Route path="/StaffManage" element={<StaffManage />}></Route>
       <Route path="/SignUp" element={<Loginsignup />}></Route>
     </Routes>
   );
