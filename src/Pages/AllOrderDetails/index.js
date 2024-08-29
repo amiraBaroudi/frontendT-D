@@ -16,7 +16,7 @@ function FullOrderDetails() {
 
 function AllOrderTable() {
   const [data, setData] = useState([]);
-useEffect(() => {/*post*/
+useEffect(() => {/*get*/
   axios
     .get("http://localhost:8000/api/orders")
     .then((res) => {
