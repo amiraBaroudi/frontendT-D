@@ -1,4 +1,4 @@
-import { Space, Typography, Table } from "antd";
+import { Space, Typography, Table, Button, Popconfirm } from "antd";
 import LayoutWrapper from "../../components/layout";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -23,44 +23,83 @@ function RecentOrder() {
       .then((res) => {
         console.log(res.data);
         setUser(res.data.data);
-        console.log("User get successfuly");
+        console.log("User get successfully");
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
+  const handleDelete = (userId) => {
+    axios
+      .delete("http://localhost:8000/api/users/{user}")
+      .then(() => {
+        setUser(User.filter(user => user.Id !== userId));
+        console.log("User deleted successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const columns = [
+    {
+      title: "User ID",
+      dataIndex: "Id",
+      key: "Id",
+    },
+    {
+      title: "User Name",
+      dataIndex: "Text",
+      key: "Text",
+    },
+    {
+      title: "Phone Number",
+      dataIndex: "Number",
+      key: "Number",
+    },
+    {
+      title: "Email",
+      dataIndex: "Email",
+      key: "Email",
+    },
+    {
+      title: "Password",
+      dataIndex: "password",
+      key: "password",
+      render: (text) => <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{text}</div>
+    },
+    {
+      title: "Role",
+      dataIndex: "boolean",
+      key: "boolean",
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (_, record) => (
+        <Space size="middle">
+          <Popconfirm
+            title="Are you sure you want to delete this user?"
+            onConfirm={() => handleDelete(record.Id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button danger>Delete</Button>
+          </Popconfirm>
+        </Space>
+      ),
+    },
+  ];
+
   return (
     <Table
       className="table"
-      columns={[
-        {
-          title: "User ID",
-          dataIndex: "Id",
-        },
-        {
-          title: "User Name",
-          dataIndex: "Text",
-        },
-        {
-          title: "Phone Number",
-          dataIndex: "Number",
-        },
-        {
-          title: "Email",
-          dataIndex: "Email",
-        },
-        {
-          title: "Password",
-          dataIndex: "password",
-        },
-        {
-          title: "Role",
-          dataIndex: "boolean",
-        },
-      ]}
+      columns={columns}
       dataSource={User}
-    ></Table>
+      rowKey="Id" // Add rowKey to ensure unique rows
+    />
   );
 }
+
 export default ActiveOrders;
