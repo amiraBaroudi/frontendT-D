@@ -1,5 +1,7 @@
 import { Space, Typography, Table, Button } from "antd";
 import LayoutWrapper from "../../components/layout";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function FullOrderDetails() {
   return (
@@ -13,33 +15,45 @@ function FullOrderDetails() {
 }
 
 function AllOrderTable() {
+  const [data, setData] = useState([]);
+useEffect(() => {
+  axios
+    .get("http://localhost:8000/api/orders")
+    .then((res) => {
+      setData(res.data.data);
+      console.log(res.data.data)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}, []);
   return (
     <Table
       className="table"
       columns={[
         {
           title: "Customer ID",
-          dataIndex: "driverId",
+          dataIndex: "user_id",
         },
         {
           title: "Email",
-          dataIndex: "driverName",
+          dataIndex: "person_firstname",
         },
         {
           title: "Date & Time Pickup",
-          dataIndex: "Time",
+          dataIndex: "pickup_time",
         },
         {
-          title: "Price",
-          dataIndex: "price",
+          title: "email",
+          dataIndex: "person_email",
         },
         {
-          title: "Order Date",
-          dataIndex: "",
+          title: "Date",
+          dataIndex: "pickup_date",
         },
         {
           title: "Statuse",
-          dataIndex: "boolean",
+          dataIndex: "status",
         },
         {
           title: "Action",
@@ -51,6 +65,7 @@ function AllOrderTable() {
           ),
         },
       ]}
+      dataSource={data}
     ></Table>
   );
 }

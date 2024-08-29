@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../styles/booking-form.css";
 import { Form, FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, Input, Button } from "reactstrap";
+import axios from "axios";
 
 const BookingForm = () => {
   const [FirstName, setFirstName] = useState('');
@@ -9,7 +10,7 @@ const BookingForm = () => {
   const [PhoneNum, setPhoneNum] = useState('');
   const [PickupAddress, setPickupAddress] = useState('');
   const [DropoffAddress, setDropoffAddress] = useState('');
-  const [Date, setDate] = useState('');
+  const [Datevalue, setDate] = useState('');
   const [Time, setTime] = useState('');
   const [Not, setNot] = useState('');
 
@@ -18,7 +19,13 @@ const BookingForm = () => {
   const [itemSize, setItemSize] = useState('');
   const [itemMaterial, setItemMaterial] = useState('');
   const [items, setItems] = useState([]);
-
+  const today =new Date().toISOString().split('T')[0]
+  const getCurrentTime = () => {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    return` ${hours}:${minutes}`;
+  };
   const toggleModal = () => setModalOpen(!modalOpen);
 
   const handleItemSubmit = () => {
@@ -41,11 +48,67 @@ const BookingForm = () => {
     const updatedItems = items.filter((_, i) => i !== index);
     setItems(updatedItems);
   };
+  
 
-  const submitHandler = (event) => {  
+  const submitHandler = (event) => {
     event.preventDefault();
-    // Handle form submission logic here
-    console.log("Form submitted with items:", items);
+    console.log("order added sucessfuly",{
+      user_id: 1,
+      order_date: "2024-08-29",
+      pickup_address: PickupAddress,
+      dropoff_address: DropoffAddress,
+      pickup_date: Datevalue,
+      pickup_time: Time,
+      furniture_details: Not,
+      status: "pending",
+      person_firstname: FirstName,
+      person_lastname: LastName,
+      person_phone_number: PhoneNum,
+      person_email: EmailName,
+      furniture:[]
+    });
+    axios
+      .post("http://localhost:8000/api/orders", {
+        
+        user_id: 1,
+         order_date: "2024-08-29",
+        pickup_address: PickupAddress,
+        dropoff_address: DropoffAddress,
+        pickup_date: Datevalue,
+        pickup_time: "15:45:15",
+        furniture_details: Not,
+         status: "pending",
+        person_firstname: FirstName,
+        person_lastname: LastName,
+        person_phone_number: PhoneNum,
+        person_email: EmailName,
+       furniture:  [
+        {
+            "name": "Sofa",
+            "size": "Large",
+            "type": "non-fragile"
+        },
+        {
+            "name": "Chair",
+            "size": "Medium",
+            "type": "fragile"
+        }
+    ]
+   
+  
+   
+ 
+   
+})
+      .then((res) => {
+        console.log("order added sucessfuly");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  
+
+     
   };
 
   return (
@@ -59,10 +122,10 @@ const BookingForm = () => {
         </FormGroup>
 
         <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <input type="email" placeholder="Email" value={EmailName} onChange={(e) => setEmailName(e.target.value)} />
+          <input type="string" placeholder="Email" value={EmailName} onChange={(e) => setEmailName(e.target.value)} />
         </FormGroup>
         <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <input type="number" placeholder="Phone Number" value={PhoneNum} onChange={(e) => setPhoneNum(e.target.value)} />
+          <input type="string" placeholder="Phone Number" value={PhoneNum} onChange={(e) => setPhoneNum(e.target.value)} />
         </FormGroup>
 
         <FormGroup className="booking__form d-inline-block me-4 mb-4">
@@ -73,7 +136,7 @@ const BookingForm = () => {
         </FormGroup>
 
         <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <input type="date" placeholder="Journey Date" value={Date} onChange={(e) => setDate(e.target.value)} />
+          <input type="date" placeholder="Journey Date " min={today} value={Datevalue} onChange={(e) => setDate(e.target.value)} />
         </FormGroup>
 
         <FormGroup className="booking__form d-inline-block ms-1 mb-4">
@@ -82,6 +145,7 @@ const BookingForm = () => {
             placeholder="Journey Time"
             className="time__picker"
             value={Time}
+            min={getCurrentTime()}
             onChange={(e) => setTime(e.target.value)}
           />
         </FormGroup>
@@ -134,8 +198,8 @@ const BookingForm = () => {
               onChange={(e) => setItemMaterial(e.target.value)}
             >
               <option value="">Select Material</option>
-              <option value="Fragile">Fragile</option>
-              <option value="Non-Fragile">Non-Fragile</option>
+              <option value="Fragile">Breakable</option>
+              <option value="Non-Fragile">UnBreakable</option>
             </Input>
           </FormGroup>
         </ModalBody>

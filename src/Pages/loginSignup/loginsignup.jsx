@@ -2,14 +2,30 @@ import React, { useState } from "react";
 import './loginsignup.css';
 import { RiAccountCircleLine, RiLockPasswordFill } from "react-icons/ri";
 import axios from "axios";
-
+import { Button, notification } from 'antd';
+import { MdOutlineMailOutline } from "react-icons/md";
+import { FaPhoneAlt } from "react-icons/fa";
 const Loginsignup = () => {
     const [action, setAction] = useState("Sign Up"); // التحكم بالحالة (تسجيل الدخول أو التسجيل)
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [accept, setAccept] = useState(false);
-
-    // تغيير الحالة بين تسجيل الدخول والتسجيل
+    const [api, contextHolder] = notification.useNotification();
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState('');
+    // تغيير الحالة بين تسجيل الدخول وconst openNotification = () => {
+        const openNotification = () => {
+            api.open({
+              message: 'Notification Title',
+              description:
+                "login sucessfuly",
+              className: 'custom-class',
+              style: {
+                width: 400,
+              },
+            });
+          };
+    
     const toggleAction = () => {
         const newAction = action === "Sign Up" ? "Login" : "Sign Up";
         setAction(newAction);
@@ -18,7 +34,7 @@ const Loginsignup = () => {
         setPassword("");
     };
 
-    const handleSubmit = (e) => {
+    const Submit = (e) => {
         e.preventDefault();
 
         if (name === "" || password.length < 8) {
@@ -27,11 +43,11 @@ const Loginsignup = () => {
         }
 
         setAccept(false);
-        const newData = { name, password };
-
+        const newData = { name, password,email, phone_number:phone};
+console.log(newData)
         if (action === "Sign Up") {
             axios
-                .post("http://localhost:8000/api/users/create", newData)
+                .post("http://127.0.0.1:8000/api/register", newData)
                 .then((res) => {
                     console.log(res.data);
                     console.log("User created successfully");
@@ -42,67 +58,63 @@ const Loginsignup = () => {
         } else if (action === "Login") {
             axios
                 .post("http://localhost:8000/api/login",{
-                username:name,
+                email,
                 password:password,
                 })
                 .then((res) => {
                     console.log(res.data);
                     console.log("User logged in successfully");
-                })
-                .catch((error) => {
-                    console.error("There was an error logging in!", error);
+                    openNotification();
+                      window.location='/dashboard'
+                    localStorage.setItem("token",JSON.stringify(res.data.token))
+                }
+            )
+                .catch((error) => {openNotification();
+
+                  window.location='/'
                 });
         }
     };
 
     return (
         <div className="container2">
+             {contextHolder}
             <div className="header">
                 <div className="text">{action}</div>
                 <div className="underline"></div>
             </div>
-            <form onSubmit={handleSubmit}>
-                <div className="inputs">
-                    <div className="input" style={{ padding: '20px' }}>
-                        <RiAccountCircleLine className="icon" />
-                        <input
-                            type="text"
-                            placeholder="UserName"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                        {name === "" && accept && <p className="erMassage">UserName is Required</p>}
-                    </div>
-                    <div className="input">
-                        <RiLockPasswordFill className="icon" />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        {password.length < 8 && accept && <p className="erMassage">Password must be more than 8 characters</p>}
-                    </div>
-                </div>
+            <form onSubmit={Submit}>
+        <div className="inputs">
+            <div className="input">
+            <MdOutlineMailOutline className="icon"/><input type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)}/>
+             
+                {name === "" && accept && <p className="erMassage">UserName is Required</p>}
+            </div>
+            {action==="Login" ? (<div></div>) : (<div className="input">
+                <FaPhoneAlt className="icon"/> <input
+                type="text"
+                placeholder="PhoneNumber"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+                </div>)}   
+            {action==="Login" ? (<div></div>) : (<div className="input">
+                <RiAccountCircleLine className="icon"/><input type="text" placeholder="UserName" value={name} onChange={(e) => setName(e.target.value)}/>
+            </div>)}
+            <div className="input">
+                <RiLockPasswordFill className="icon"/><input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                {password.length < 8 && accept && <p className="erMassage">password must be more than 8 characters</p>}
+            </div>
+           
+        </div>
 
-                <div className="submit-container">
-                    {/* زر لتبديل الحالة بين تسجيل الدخول والتسجيل */}
-                    <button
-                        type="button"
-                        className="submit"
-                        onClick={toggleAction}
-                    >
-                        {action === "Sign Up" ? "Switch to Login" : "Switch to Sign Up"}
-                    </button>
-                    {/* زر لتقديم النموذج */}
-                    <button
-                        type="submit"
-                        className="submit"
-                    >
-                        {action}
-                    </button>
-                </div>
-            </form>
+        {action==="Sign Up"?<div></div>:<div className="forgot-password">Lost Password? <span>Click Here!</span></div>}
+
+        <div className="submit-container">
+            <button className={action === "Login" ? "submit gray" : "submit" } onClick={()=>{setAction("Sign Up")}}>Sign Up</button>
+            <button className={action === "Sign Up" ? "submit gray" : "submit" } onClick={()=>{setAction("Login")}}>Login</button>
+        </div>
+        </form>  
         </div>
     );
 };

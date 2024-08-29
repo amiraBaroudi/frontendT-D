@@ -90,7 +90,7 @@ const Header = () => {
                 </span>
                 <div className="header__location-content">
                   <h4>Every Day</h4>
-                  <h6>9AM - 7PM</h6>
+                  <h6>24 Hour</h6>
                 </div>
               </div>
             </Col>

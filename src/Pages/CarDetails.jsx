@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-
 import carData from "../assets/data/carData";
 import { Container, Row, Col } from "reactstrap";
 import Helmet from "../components/UserHelmet/index.jsx";
 import { useParams } from "react-router-dom";
 import BookingForm from "../components/UI/BookingForm";
-import PaymentMethod from "../components/UI/PaymentMethod";
 import UserLayout from "../components/UserLayout"
 
 const CarDetails = () => {
@@ -71,13 +69,14 @@ const CarDetails = () => {
                 <BookingForm />
               </div>
             </Col>
-
+{/* 
             <Col lg="5" className="mt-5">
               <div className="payment__info mt-5">
                 <h5 className="mb-4 fw-bold ">Payment Information</h5>
                 <PaymentMethod />
               </div>
             </Col>
+            */}
           </Row>
         </Container>
       </section>
