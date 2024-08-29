@@ -41,9 +41,9 @@ const Loginsignup = () => {
                 });
         } else if (action === "Login") {
             axios
-                .post("http://localhost:8000/api/login", newData ,{
-                username: name,
-                password: password,
+                .post("http://localhost:8000/api/login",{
+                username:name,
+                password:password,
                 })
                 .then((res) => {
                     console.log(res.data);

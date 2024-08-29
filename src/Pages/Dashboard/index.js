@@ -24,6 +24,7 @@ function Dashboard() {
           setStatistics(stats); // تعيين الكائن إلى الحالة
         }
         console.log("Statistics retrieved successfully");
+        console.log("Statistics retrieved successfully", res.data.data);
       })
       .catch((error) => {
         console.error("Error fetching statistics", error);
