@@ -45,12 +45,12 @@ function RecentOrder() {
   const columns = [
     {
       title: "User ID",
-      dataIndex: "Id",
+      dataIndex: "user_id",
       key: "Id",
     },
     {
       title: "User Name",
-      dataIndex: "Text",
+      dataIndex: "name",
       key: "Text",
     },
     {
@@ -91,7 +91,6 @@ function RecentOrder() {
       ),
     },
   ];
-
   return (
     <Table
       className="table"
