@@ -26,11 +26,12 @@ const PendingOrderHistory = () => {
 
   const handleConfirmOrder = (orderId) => {
     // Handle order confirmation
+    console.log(orderId)
     axios
-      .post(`http://localhost:8000/api/orders/${orderId}/confirm`)
+      .patch(`http://localhost:8000/api/orders/${orderId}/complete`)
       .then((response) => {
         // Update the order list after confirmation
-        setOrders(orders.map(order => order.id === orderId ? { ...order, status: 'Confirmed' } : order));
+      //  setOrders(orders.map(order => order.id === orderId ? { ...order, status: 'Confirmed' } : order));
         setIsModalOpen(false);
       })
       .catch((error) => {
@@ -41,18 +42,24 @@ const PendingOrderHistory = () => {
 
   const columns = [
     {
-      title: "Order ID",
-      dataIndex: "id",
-      key: "id",
+      title: "order id",
+      dataIndex:"order_id",
+      key: "person_firstname",
     },
     {
-      title: "Customer Name",
-      dataIndex: "customerName",
-      key: "customerName",
+      title: "first name",
+      dataIndex: "person_firstname",
+      key: "person_firstname",
     },
+    {
+      title: "last name",
+      dataIndex: "person_lastname",
+      key: "person_firstname",
+    },
+    
     {
       title: "Order Date",
-      dataIndex: "orderDate",
+      dataIndex: "pickup_date",
       key: "orderDate",
     },
     {
@@ -76,6 +83,7 @@ const PendingOrderHistory = () => {
   ];
 
   const handleViewDetails = (order) => {
+    console.log(selectedOrder)
     // Open a modal to view order details
     setSelectedOrder(order);
     setIsModalOpen(true);
@@ -96,18 +104,19 @@ const PendingOrderHistory = () => {
       )}
 
       <Modal
-        title={`Order Details - ${selectedOrder?.id}`}
+        title={`Order Details - ${selectedOrder?.order_id}`}
         visible={isModalOpen}
         onCancel={() => setIsModalOpen(false)}
         footer={null}
       >
+        
         {selectedOrder ? (
           <div>
-            <p><strong>Order ID:</strong> {selectedOrder.id}</p>
-            <p><strong>Customer Name:</strong> {selectedOrder.customerName}</p>
-            <p><strong>Order Date:</strong> {selectedOrder.orderDate}</p>
+            <p><strong>Order ID:</strong> {selectedOrder.order_id}</p>
+            <p><strong>Customer Name:</strong> {selectedOrder.person_firstname}</p>
+            <p><strong>Order Date:</strong> {selectedOrder.pickup_date}</p>
             <p><strong>Status:</strong> {selectedOrder.status}</p>
-            <Button type="primary" onClick={() => handleConfirmOrder(selectedOrder.id)}>Confirm Order</Button>
+            <Button type="primary" onClick={() => handleConfirmOrder(selectedOrder.order_id)}>Confirm Order{selectedOrder.id}</Button>
           </div>
         ) : (
           <p>No details available</p>

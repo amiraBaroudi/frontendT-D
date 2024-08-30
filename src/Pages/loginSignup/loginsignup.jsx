@@ -35,22 +35,24 @@ const Loginsignup = () => {
     };
 
     const Submit = (e) => {
+        console.log('kdkdk')
         e.preventDefault();
 
-        if (name === "" || password.length < 8) {
+        if (email === "" || password.length < 8) {
             setAccept(true);
             return;
         }
 
         setAccept(false);
         const newData = { name, password,email, phone_number:phone};
-console.log(newData)
+
         if (action === "Sign Up") {
             axios
                 .post("http://127.0.0.1:8000/api/register", newData)
                 .then((res) => {
                     console.log(res.data);
                     console.log("User created successfully");
+                    openNotification();
                 })
                 .catch((error) => {
                     console.error("There was an error creating the user!", error);
@@ -65,13 +67,13 @@ console.log(newData)
                     console.log(res.data);
                     console.log("User logged in successfully");
                     openNotification();
-                      window.location='/dashboard'
+                      //window.location='/dashboard'
                     localStorage.setItem("token",JSON.stringify(res.data.token))
                 }
             )
-                .catch((error) => {openNotification();
-
-                  window.location='/'
+                .catch((error) => {
+                openNotification();
+                 window.location='/'
                 });
         }
     };
@@ -88,7 +90,7 @@ console.log(newData)
             <div className="input">
             <MdOutlineMailOutline className="icon"/><input type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)}/>
              
-                {name === "" && accept && <p className="erMassage">UserName is Required</p>}
+                {email === "" && accept && <p className="erMassage">email is Required</p>}
             </div>
             {action==="Login" ? (<div></div>) : (<div className="input">
                 <FaPhoneAlt className="icon"/> <input
@@ -98,7 +100,8 @@ console.log(newData)
                 onChange={(e) => setPhone(e.target.value)}
               />
                 </div>)}   
-            {action==="Login" ? (<div></div>) : (<div className="input">
+            {action==="Login" ? (<div></div>) : (
+                <div className="input">
                 <RiAccountCircleLine className="icon"/><input type="text" placeholder="UserName" value={name} onChange={(e) => setName(e.target.value)}/>
             </div>)}
             <div className="input">

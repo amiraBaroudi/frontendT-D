@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../styles/booking-form.css";
 import { Form, FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, Input, Button } from "reactstrap";
 import axios from "axios";
-
+import {  notification } from 'antd';
 const BookingForm = () => {
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
@@ -19,7 +19,7 @@ const BookingForm = () => {
   const [itemSize, setItemSize] = useState('');
   const [itemMaterial, setItemMaterial] = useState('');
   const [items, setItems] = useState([]);
-
+  const [api, contextHolder] = notification.useNotification();
   const today = new Date().toISOString().split('T')[0];
 
   const getCurrentTime = () => {
@@ -30,7 +30,17 @@ const BookingForm = () => {
   };
 
   const toggleModal = () => setModalOpen(!modalOpen);
-
+  const openNotification = () => {
+    api.open({
+      message: 'Notification Title',
+      description:
+        "order created sucessfuly",
+      className: 'custom-class',
+      style: {
+        width: 400,
+      },
+    });
+  };
   const handleItemSubmit = () => {
     if (itemName && itemSize && itemMaterial) {
       const newItem = { name: itemName, size: itemSize, type: itemMaterial };
@@ -55,21 +65,36 @@ const BookingForm = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     axios.post("http://localhost:8000/api/orders", {
-      user_id: 1,
-      order_date: "2024-08-29",
-      pickup_address: PickupAddress,
-      dropoff_address: DropoffAddress,
-      pickup_date: Datevalue,
-      pickup_time: Time,
-      furniture_details: Not,
-      status: "pending",
-      person_firstname: FirstName,
-      person_lastname: LastName,
-      person_phone_number: PhoneNum,
-      person_email: EmailName,
-      furniture: items
-    })
+ 
+      
+    user_id: 1,
+    order_date: "2024-09-1",
+    pickup_address: PickupAddress,
+    dropoff_address: DropoffAddress,
+    pickup_date: Datevalue,
+    pickup_time: Time,
+    furniture_details: "Sofa and Chairs",
+    status: "pending",
+    person_firstname: FirstName,
+    person_lastname: LastName,
+    person_phone_number: PhoneNum,
+    person_email: EmailName,
+    furniture: [
+        {
+            "name": "Sofa",
+            "size": "Large",
+            "type": "non-fragile"
+        },
+        {
+            "name": "Chair",
+            "size": "Medium",
+            "type": "fragile"
+        }
+    ]
+        },
+       )
     .then((res) => {
+      openNotification();
       console.log("Order added successfully", res.data);
     })
     .catch((error) => {
@@ -79,6 +104,7 @@ const BookingForm = () => {
 
   return (
     <>
+         {contextHolder}
       <Form onSubmit={submitHandler}>
         <FormGroup className="booking__form d-inline-block me-4 mb-4">
           <Input type="text" placeholder="First Name" value={FirstName} onChange={(e) => setFirstName(e.target.value)} />
