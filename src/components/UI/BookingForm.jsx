@@ -19,18 +19,21 @@ const BookingForm = () => {
   const [itemSize, setItemSize] = useState('');
   const [itemMaterial, setItemMaterial] = useState('');
   const [items, setItems] = useState([]);
-  const today =new Date().toISOString().split('T')[0]
+
+  const today = new Date().toISOString().split('T')[0];
+
   const getCurrentTime = () => {
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
-    return` ${hours}:${minutes}`;
+    return `${hours}:${minutes}`;
   };
+
   const toggleModal = () => setModalOpen(!modalOpen);
 
   const handleItemSubmit = () => {
     if (itemName && itemSize && itemMaterial) {
-      const newItem = { name: itemName, size: itemSize, material: itemMaterial };
+      const newItem = { name: itemName, size: itemSize, type: itemMaterial };
       setItems([...items, newItem]);
       setItemName('');
       setItemSize('');
@@ -48,11 +51,10 @@ const BookingForm = () => {
     const updatedItems = items.filter((_, i) => i !== index);
     setItems(updatedItems);
   };
-  
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log("order added sucessfuly",{
+    axios.post("http://localhost:8000/api/orders", {
       user_id: 1,
       order_date: "2024-08-29",
       pickup_address: PickupAddress,
@@ -65,82 +67,46 @@ const BookingForm = () => {
       person_lastname: LastName,
       person_phone_number: PhoneNum,
       person_email: EmailName,
-      furniture:[]
+      furniture: items
+    })
+    .then((res) => {
+      console.log("Order added successfully", res.data);
+    })
+    .catch((error) => {
+      console.log("Error:", error.response.data);
     });
-    axios
-      .post("http://localhost:8000/api/orders", {
-        
-        user_id: 1,
-         order_date: "2024-08-29",
-        pickup_address: PickupAddress,
-        dropoff_address: DropoffAddress,
-        pickup_date: Datevalue,
-        pickup_time: "15:45:15",
-        furniture_details: Not,
-         status: "pending",
-        person_firstname: FirstName,
-        person_lastname: LastName,
-        person_phone_number: PhoneNum,
-        person_email: EmailName,
-       furniture:  [
-        {
-            "name": "Sofa",
-            "size": "Large",
-            "type": "non-fragile"
-        },
-        {
-            "name": "Chair",
-            "size": "Medium",
-            "type": "fragile"
-        }
-    ]
-   
-  
-   
- 
-   
-})
-      .then((res) => {
-        console.log("order added sucessfuly");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  
-
-     
   };
 
   return (
     <>
       <Form onSubmit={submitHandler}>
         <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <input type="text" placeholder="First Name" value={FirstName} onChange={(e) => setFirstName(e.target.value)} />
+          <Input type="text" placeholder="First Name" value={FirstName} onChange={(e) => setFirstName(e.target.value)} />
         </FormGroup>
         <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <input type="text" placeholder="Last Name" value={LastName} onChange={(e) => setLastName(e.target.value)} />
+          <Input type="text" placeholder="Last Name" value={LastName} onChange={(e) => setLastName(e.target.value)} />
         </FormGroup>
 
         <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <input type="string" placeholder="Email" value={EmailName} onChange={(e) => setEmailName(e.target.value)} />
+          <Input type="email" placeholder="Email" value={EmailName} onChange={(e) => setEmailName(e.target.value)} />
         </FormGroup>
         <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <input type="string" placeholder="Phone Number" value={PhoneNum} onChange={(e) => setPhoneNum(e.target.value)} />
+          <Input type="text" placeholder="Phone Number" value={PhoneNum} onChange={(e) => setPhoneNum(e.target.value)} />
         </FormGroup>
 
         <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <input type="text" placeholder="Pickup Address" value={PickupAddress} onChange={(e) => setPickupAddress(e.target.value)} />
+          <Input type="text" placeholder="Pickup Address" value={PickupAddress} onChange={(e) => setPickupAddress(e.target.value)} />
         </FormGroup>
         <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <input type="text" placeholder="Dropoff Address" value={DropoffAddress} onChange={(e) => setDropoffAddress(e.target.value)} />
+          <Input type="text" placeholder="Dropoff Address" value={DropoffAddress} onChange={(e) => setDropoffAddress(e.target.value)} />
         </FormGroup>
 
         <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <input type="date" placeholder="Journey Date " min={today} value={Datevalue} onChange={(e) => setDate(e.target.value)} />
+          <Input type="date" placeholder="Journey Date" min={today} value={Datevalue} onChange={(e) => setDate(e.target.value)} />
         </FormGroup>
 
         <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <input
+          <Input
             type="time"
             placeholder="Journey Time"
             className="time__picker"
@@ -151,14 +117,14 @@ const BookingForm = () => {
         </FormGroup>
 
         <FormGroup>
-          <textarea
-            rows={5}
+          <Input
             type="textarea"
+            rows={5}
             className="textarea"
             placeholder="Write a note"
             value={Not}
             onChange={(e) => setNot(e.target.value)}
-          ></textarea>
+          />
         </FormGroup>
 
         <div className="payment text-end mt-5">
@@ -199,7 +165,7 @@ const BookingForm = () => {
             >
               <option value="">Select Material</option>
               <option value="Fragile">Breakable</option>
-              <option value="Non-Fragile">UnBreakable</option>
+              <option value="Non-Fragile">Unbreakable</option>
             </Input>
           </FormGroup>
         </ModalBody>
@@ -215,7 +181,7 @@ const BookingForm = () => {
         <ul>
           {items.map((item, index) => (
             <li key={index}>
-              {item.name} - {item.size} - {item.material}
+              {item.name} - {item.size} - {item.type}
               <Button color="danger" size="sm" onClick={() => handleRemoveItem(index)} className="ms-2">Remove</Button>
             </li>
           ))}

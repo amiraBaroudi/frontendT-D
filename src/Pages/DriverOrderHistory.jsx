@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Table, Button, Space, Spin, Modal } from "antd";
+import { Typography, Table, Button, Space, Spin, Modal, notification } from "antd";
 import DriverLayout from "../components/DriverLayout";
 import axios from "axios";
 
@@ -19,6 +19,10 @@ const OrderHistory = () => {
       })
       .catch((error) => {
         console.error("Error fetching past orders:", error);
+        notification.error({
+          message: 'Data Fetch Error',
+          description: 'Failed to load past orders. Please try again later.',
+        });
         setLoading(false);
       });
   }, []);
@@ -88,7 +92,7 @@ const OrderHistory = () => {
             <p><strong>Customer Name:</strong> {selectedOrder.customerName}</p>
             <p><strong>Order Date:</strong> {selectedOrder.orderDate}</p>
             <p><strong>Status:</strong> {selectedOrder.status}</p>
-            <p><strong>Details:</strong> {selectedOrder.details}</p>
+            {selectedOrder.details && <p><strong>Details:</strong> {selectedOrder.details}</p>}
           </div>
         ) : (
           <p>No details available</p>

@@ -3,7 +3,7 @@ import { Typography, Table, Button, Space, Modal, Spin } from "antd";
 import DriverLayout from "../components/DriverLayout";
 import axios from "axios";
 
-const PindingOrderHistory = () => {
+const PendingOrderHistory = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -14,6 +14,7 @@ const PindingOrderHistory = () => {
     axios
       .get("http://localhost:8000/api/orders")
       .then((response) => {
+        console.log("Fetched orders:", response.data.data); // تصحيح البيانات
         setOrders(response.data.data);
         setLoading(false);
       })
@@ -82,7 +83,7 @@ const PindingOrderHistory = () => {
 
   return (
     <DriverLayout>
-      <Typography.Title level={4}>Pinding Order History</Typography.Title>
+      <Typography.Title level={4}>Pending Order History</Typography.Title>
 
       {loading ? (
         <Spin size="large" />
@@ -116,4 +117,4 @@ const PindingOrderHistory = () => {
   );
 };
 
-export default PindingOrderHistory;
+export default PendingOrderHistory;
