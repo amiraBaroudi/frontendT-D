@@ -8,20 +8,48 @@ import { useState, useEffect } from "react";
 
 function Dashboard() {
   const [statistics, setStatistics] = useState({
-    numberOfClients: 0,
-    totalRequests: 0,
     activeOrders: 0,
-    totalDrivers: 0,
+
     busyDrivers: 0,
   });
-
+  const [totalDrivers, setTotalDrivers] = useState(0);
+  const [numberOfClients, setNumberOfClients] = useState(0);
+  const [totalOrder, settotalOrder] = useState(0);
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/statistics")
+      .get("http://localhost:8000/api/orders")
       .then((res) => {
         if (res.data && res.data.data && res.data.data.length > 0) {
           const stats = res.data.data[0]; // الحصول على أول كائن من المصفوفة
-          setStatistics(stats); // تعيين الكائن إلى الحالة
+          settotalOrder(res.data.data.length)// تعيين الكائن إلى الحالة
+        }
+        console.log("Statistics retrieved successfully");
+        console.log("Statistics retrieved successfully", res.data.data);
+      
+      })
+      .catch((error) => {
+        console.error("Error fetching statistics", error);
+      });
+      axios
+      .get("http://localhost:8000/api/drivers")
+      .then((res) => {
+        if (res.data && res.data.data && res.data.data.length > 0) {
+          const stats = res.data.data[0]; // الحصول على أول كائن من المصفوفة
+         setTotalDrivers(res.data.data.length) // تعيين الكائن إلى الحالة
+        }
+        console.log("Statistics retrieved successfully");
+        console.log("Statistics retrieved successfully", res.data.data);
+      
+      })
+      .catch((error) => {
+        console.error("Error fetching statistics", error);
+      });
+      axios
+      .get("http://localhost:8000/api/users")
+      .then((res) => {
+        if (res.data && res.data.data && res.data.data.length > 0) {
+          const stats = res.data.data[0]; // الحصول على أول كائن من المصفوفة
+          setNumberOfClients(res.data.data.length)// تعيين الكائن إلى الحا// تعيين الكائن إلى الحالة
         }
         console.log("Statistics retrieved successfully");
         console.log("Statistics retrieved successfully", res.data.data);
@@ -47,7 +75,7 @@ function Dashboard() {
             />
           }
           title="Number of clients"
-          value={statistics.numberOfClients}
+          value={numberOfClients}
         />
         <StatisticsCard
           icon={
@@ -75,7 +103,7 @@ function Dashboard() {
             />
           }
           title="Number of active orders now"
-          value={statistics.activeOrders}
+          value={totalOrder}
         />
         <StatisticsCard
           icon={
@@ -89,7 +117,7 @@ function Dashboard() {
             />
           }
           title="Total number of drivers"
-          value={statistics.totalDrivers}
+          value={totalDrivers}
         />
         <StatisticsCard
           icon={

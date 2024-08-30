@@ -67,7 +67,7 @@ const Loginsignup = () => {
                     console.log(res.data);
                     console.log("User logged in successfully");
                     openNotification();
-                      //window.location='/dashboard'
+                      window.location='/dashboard'
                     localStorage.setItem("token",JSON.stringify(res.data.token))
                 }
             )
