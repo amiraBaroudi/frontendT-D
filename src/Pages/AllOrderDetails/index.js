@@ -55,15 +55,7 @@ useEffect(() => {/*get*/
           title: "Statuse",
           dataIndex: "status",
         },
-        {
-          title: "Action",
-          dataIndex: "Button",
-          render: () => (
-            <Button type="primary" size="small">
-              Edit
-            </Button>
-          ),
-        },
+        
       ]}
       dataSource={data}
     ></Table>

@@ -15,15 +15,15 @@ function ActiveOrders() {
 }
 
 function RecentOrder() {
-  const [User, setUser] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/users")
       .then((res) => {
         console.log(res.data);
-        setUser(res.data.data);
-        console.log("User get successfully");
+        setUsers(res.data.data);
+        console.log("Users fetched successfully");
       })
       .catch((error) => {
         console.log(error);
@@ -32,9 +32,9 @@ function RecentOrder() {
 
   const handleDelete = (userId) => {
     axios
-      .delete("http://localhost:8000/api/users/{user}")
+      .delete(`http://localhost:8000/api/users/${userId}`)
       .then(() => {
-        setUser(User.filter(user => user.Id !== userId));
+        setUsers(users.filter(user => user.user_id !== userId));
         console.log("User deleted successfully");
       })
       .catch((error) => {
@@ -46,22 +46,22 @@ function RecentOrder() {
     {
       title: "User ID",
       dataIndex: "user_id",
-      key: "Id",
+      key: "user_id",
     },
     {
       title: "User Name",
       dataIndex: "name",
-      key: "Text",
+      key: "name",
     },
     {
       title: "Phone Number",
-      dataIndex: "Number",
-      key: "Number",
+      dataIndex: "phone_number", // تأكد من تطابق الحقل مع البيانات الفعلية
+      key: "phone_number",
     },
     {
       title: "Email",
-      dataIndex: "Email",
-      key: "Email",
+      dataIndex: "email", // تأكد من تطابق الحقل مع البيانات الفعلية
+      key: "email",
     },
     {
       title: "Password",
@@ -71,8 +71,8 @@ function RecentOrder() {
     },
     {
       title: "Role",
-      dataIndex: "boolean",
-      key: "boolean",
+      dataIndex: "role", // تأكد من تطابق الحقل مع البيانات الفعلية
+      key: "role",
     },
     {
       title: "Actions",
@@ -81,7 +81,7 @@ function RecentOrder() {
         <Space size="middle">
           <Popconfirm
             title="Are you sure you want to delete this user?"
-            onConfirm={() => handleDelete(record.Id)}
+            onConfirm={() => handleDelete(record.user_id)} // تأكد من تطابق الحقل مع البيانات الفعلية
             okText="Yes"
             cancelText="No"
           >
@@ -91,12 +91,13 @@ function RecentOrder() {
       ),
     },
   ];
+
   return (
     <Table
       className="table"
       columns={columns}
-      dataSource={User}
-      rowKey="Id" // Add rowKey to ensure unique rows
+      dataSource={users} // تأكد من تطابق الحقل مع البيانات الفعلية
+      rowKey="user_id" // تأكد من تطابق الحقل مع البيانات الفعلية
     />
   );
 }
